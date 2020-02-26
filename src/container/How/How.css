@@ -1,0 +1,28 @@
+#how {
+  background: #161616;
+  color: #ffffff;
+  position: relative;
+  margin-bottom: -10em;
+  z-index: 10;
+  -webkit-clip-path: polygon(100% 0, 100% 85%, 0 100%, 0 100%, 0 0);
+          clip-path: polygon(100% 0, 100% 85%, 0 100%, 0 100%, 0 0);
+}
+
+#how .content {
+  padding: 2rem 0 5rem 0;
+}
+
+#how .content h1 {
+  font-weight: 500;
+  font-size: 1.7rem;
+}
+
+#how .content p {
+  margin: 10px;
+  font-size: 1.3rem;
+}
+
+#how .content p span {
+  color: #fff5f5;
+}
+/*# sourceMappingURL=How.css.map */

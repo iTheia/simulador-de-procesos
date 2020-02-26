@@ -1,0 +1,24 @@
+#how{
+    background: #161616;
+    color: #ffffff;
+    position: relative;
+    margin-bottom: -10em;
+    z-index: 10;
+    clip-path: polygon(100% 0, 100% 85%, 0 100%, 0 100%, 0 0);
+    .content{
+        padding: 2rem 0 5rem 0 ;
+
+        h1{
+            font-weight:500;
+            font-size: 1.7rem;
+        }
+
+        p{
+            margin: 10px;
+            font-size: 1.3rem;
+            span{
+                color:rgb(255, 245, 245);
+            }
+        }
+    }
+}

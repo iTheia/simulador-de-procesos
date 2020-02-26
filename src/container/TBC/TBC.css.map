@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AACI,UADM,CACN,QAAQ,CAAA;EACJ,UAAU,EAAE,OAAO;EACnB,UAAU,EAAE,IAAI;CACnB",
+    "sources": [
+        "TBC.scss"
+    ],
+    "names": [],
+    "file": "TBC.css"
+}
