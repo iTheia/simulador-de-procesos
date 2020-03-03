@@ -94,14 +94,10 @@ export default function TBC() {
     return (
         <section id="simulator">
             <div className="content">
-<<<<<<< HEAD
-                
-=======
                 <ContainerRecursos recursos={recursos}></ContainerRecursos>
                 <Creador agregarProceso={agregarProceso} recursos={recursos}></Creador>
                 <Tabla procesos={TBC.procesos}></Tabla>
                 <button onClick={()=> console.log(TBC)}>TBC</button>
->>>>>>> 2a6e6b1be2ef5303b7171dc8f7f7ab0b091a45ba
             </div>
         </section>
     )

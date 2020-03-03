@@ -15,19 +15,22 @@ export default function How() {
                 </p>
                 <h1>Como funciona el simulador</h1>
                 <article>
-                    Todo proceso tiene 3 estados basicos
+                    <p>Todo proceso tiene 3 estados basicos</p>
                     <ul>
-                        <li>Listo
+                        <li>
+                            <span>Listo</span>
                             <p>
                                 El proceso ha almacenado recursos y esta preparado para ser ejecutado
                             </p>
                         </li>
-                        <li>Bloqueado
+                        <li>
+                            <span>Bloqueado</span>
                             <p>
                                 El proceso no puede seguir siendo ejecutado puesto que necesita un recurso el cual no esta disponible
                             </p>
                         </li>
-                        <li>Finalizado
+                        <li>
+                            <span>Finalizado</span>
                             <p>
                                 El proceso ha terminado
                             </p>
@@ -39,6 +42,15 @@ export default function How() {
                     Todo proceso tendra una cantidad de recursos, tiempo necesario en el procesador y nombre
                     <br></br>
                     opcionalmente estos procesos pueden necesitar recusos adicionales, como dispositivos E/S, etc
+                </p>
+                <p>
+                    El sistema en el que el despachador trabajara es una aproximacion a Round robin, es decir, los procesos
+                    con menor tiempo en procesador seran despachados primero, para asi liberar ese espacio de memoria lo mas pronto posible
+                </p>
+                <p>
+                    Adicional a esto, Puede haber interbloqueo entre los procesos y no se pueden salir de este estados
+                    <br></br>
+                    Este es solo un sistema basico que aplica los fundamentos
                 </p>
             </div>
         </section>

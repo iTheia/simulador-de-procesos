@@ -6,19 +6,20 @@
     z-index: 10;
     clip-path: polygon(100% 0, 100% 85%, 0 100%, 0 100%, 0 0);
     .content{
-        padding: 2rem 0 5rem 0 ;
+        padding: 2rem 0 9rem 0 ;
 
         h1{
             font-weight:500;
             font-size: 1.7rem;
         }
 
+        span{
+            color:rgb(255, 252, 97);
+            font-size: 1.4rem;
+        }
         p{
             margin: 10px;
             font-size: 1.3rem;
-            span{
-                color:rgb(255, 245, 245);
-            }
         }
     }
 }

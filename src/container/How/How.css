@@ -9,7 +9,7 @@
 }
 
 #how .content {
-  padding: 2rem 0 5rem 0;
+  padding: 2rem 0 9rem 0;
 }
 
 #how .content h1 {
@@ -17,12 +17,13 @@
   font-size: 1.7rem;
 }
 
+#how .content span {
+  color: #fffc61;
+  font-size: 1.4rem;
+}
+
 #how .content p {
   margin: 10px;
   font-size: 1.3rem;
-}
-
-#how .content p span {
-  color: #fff5f5;
 }
 /*# sourceMappingURL=How.css.map */
