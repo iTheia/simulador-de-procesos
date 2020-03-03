@@ -1,0 +1,10 @@
+.ContainerRecursos .recurso{
+    display: block;
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+    display: grid;
+    align-items: center;
+    height: 30px;
+    justify-content: center;
+}
