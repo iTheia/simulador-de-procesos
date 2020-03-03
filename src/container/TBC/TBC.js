@@ -45,13 +45,7 @@ export default function TBC() {
     return (
         <section id="simulator">
             <div className="content">
-
-            <button onClick={()=>console.log(TBC)}>Revisar TBC</button>
-            <button onClick={()=>console.log(recursos)}>Revisar Recursos</button>
-            {TBC.procesos.map(proceso =>{
-                return <Proceso proceso={proceso}></Proceso>
-            })}
-            
+                
             </div>
         </section>
     )
