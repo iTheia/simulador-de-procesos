@@ -3,6 +3,7 @@ import './How.css'
 export default function How() {
     return (
         <section id="how">
+            <img src={require('./mujer.svg')} alt="" />
             <div className="content">
                 <h1>Que es un Programa</h1>
                 <p>

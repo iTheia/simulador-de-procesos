@@ -4,11 +4,21 @@
   position: relative;
   margin-bottom: -10em;
   z-index: 10;
+  position: relative;
   -webkit-clip-path: polygon(100% 0, 100% 85%, 0 100%, 0 100%, 0 0);
           clip-path: polygon(100% 0, 100% 85%, 0 100%, 0 100%, 0 0);
 }
 
+#how img {
+  width: 400px;
+  right: 0;
+  top: 30%;
+  z-index: 1;
+  position: absolute;
+}
+
 #how .content {
+  z-index: 15;
   padding: 2rem 0 9rem 0;
 }
 

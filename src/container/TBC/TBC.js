@@ -59,6 +59,7 @@ export default function TBC() {
                 <Creador TBC={TBC} recursos={recursos}></Creador>
                 <Tabla procesos={TBC.procesos} recursos={recursos}></Tabla>
                 <CreadorRecurso agregarRecurso={agregarRecurso}></CreadorRecurso>
+                <div className="container-imagen"><img className="imagen-proceso" src={require('./Proceso.svg')} alt="" /></div>
                 <RecursosDelProcesador RecursosDelProcesador={TBC.recursos}></RecursosDelProcesador>
             </div>
         </section>

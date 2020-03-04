@@ -9,7 +9,7 @@ export default function Proceso({proceso, recursos}) {
     if (proceso.estado === 'bloqueo') {
         styles.background = "#eb4034"
     }else if (proceso.estado === 'finalizado'){
-        styles.background = "#3480eb"
+        styles.background = "#00629B"
     }else{
         styles.background = "#50a700"
     }
