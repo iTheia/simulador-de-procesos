@@ -1,68 +1,30 @@
 import React,{useEffect, useState} from 'react'
-import Proceso from './Proceso/Proceso'
 import Creador from './Proceso/Creador'
 import Tabla from './Proceso/Tabla'
-import Recurso from './Proceso/Recurso'
+import CreadorRecurso from './Proceso/CreadorRecurso'
 import ContainerRecursos from './Proceso/ContainerRecursos'
 import './TBC.css'
-
+import RecursosDelProcesador from './Proceso/RecursosDelProcesador'
+import templateRecursos from './template.js'
 export default function TBC() {
     const [time, setTime] = useState(Date.now())
-    const [recursos, setRecursos] = useState([
-        {
-            ocupadoPor:1,
-            nombre:"Mouse",
-            
-        },
-        {
-            ocupadoPor:null,
-            nombre:"Teclado"
-        },
-        {
-            ocupadoPor:null,
-            nombre:"Camara"
-        },
-        {
-            ocupadoPor:null,
-            nombre:"Microfono"
-        }
-    ])
+    const [recursos, setRecursos] = useState(templateRecursos())
     const [TBC, setTBC] = useState({
         actual: 1,
         nextId:1,
-        procesos: [
-            {
-                id:1,
-                nombre:"qwe",
-                tiempo:5,
-                estado:"listo",
-                recursosNecesarios:[2],
-                recursos:0
-            },
-            {
-                id:2,
-                nombre:"qwe",
-                tiempo:5,
-                estado:"listo",
-                recursosNecesarios:[1],
-                recursos:0
-            },
-            {
-                id:3,
-                nombre:"qwe",
-                tiempo:5,
-                estado:"listo",
-                recursosNecesarios:[],
-                recursos:0
-            }
-        ]
+        recursos:2000,
+        procesos: []
     }) 
 
     useEffect(() => {
         const interval = setInterval(() => setTime(Date.now()), 1000)
         let procesoActual = obtener()
         if (procesoActual) {
+            if (procesoActual.estado === 'bloqueo') {
+                procesoActual = verificarBloqueo(procesoActual)
+            }
             procesoActual = vefiicarBloqueo(procesoActual)
+        
             if (procesoActual.estado === 'listo' ) {
                 procesoActual.tiempo -=1
             }
@@ -85,7 +47,6 @@ export default function TBC() {
             }
             
         }
-        
         return () => {
             clearInterval(interval);
         }
@@ -95,32 +56,49 @@ export default function TBC() {
         <section id="simulator">
             <div className="content">
                 <ContainerRecursos recursos={recursos}></ContainerRecursos>
-                <Creador agregarProceso={agregarProceso} recursos={recursos}></Creador>
-                <Tabla procesos={TBC.procesos}></Tabla>
-                <button onClick={()=> console.log(TBC)}>TBC</button>
+                <Creador TBC={TBC} recursos={recursos}></Creador>
+                <Tabla procesos={TBC.procesos} recursos={recursos}></Tabla>
+                <CreadorRecurso agregarRecurso={agregarRecurso}></CreadorRecurso>
+                <RecursosDelProcesador RecursosDelProcesador={TBC.recursos}></RecursosDelProcesador>
             </div>
         </section>
     )
-    function agregarProceso(proceso) {
-        proceso.id = TBC.nextId
-        TBC.nextId += 1
-        TBC.procesos.push(proceso)
-    }
     function obtener() {
         let proceso
-        TBC.procesos.forEach(element =>{
-            if (element.estado === 'finalizado' && element.id === TBC.actual) {
-                TBC.procesos.forEach(element =>{
-                    if (element.estado !== 'finalizado') {
-                        TBC.actual = element.id
-                    }
-                })
-            }
-            if(element.id === TBC.actual){
-                
-                proceso = element
+        let libresEnLista = false
+        TBC.procesos.forEach(proceso =>{
+            if (proceso.estado === 'listo') {
+                libresEnLista = true
             }
         })
+
+        if (libresEnLista) {
+            TBC.procesos.forEach(element =>{
+                if (element.estado === 'finalizado' && element.id === TBC.actual) {
+                    TBC.procesos.forEach(element =>{
+                        if (element.estado !== 'finalizado') {
+                            TBC.actual = element.id
+                        }
+                    })
+                }
+                if(element.id === TBC.actual){
+                    proceso = element
+                }
+            })
+        }
+        if (!libresEnLista){
+            TBC.procesos.forEach(element =>{
+                if (element.estado === 'bloqueo') {
+                    element.recursosNecesarios.forEach(recursoNecesario =>{
+                        const recurso = recursos[recursoNecesario]
+                        if (recurso.ocupadoPor == element.id) {
+                            TBC.actual = element.id
+                            proceso =element
+                        }
+                    })
+                }
+            })
+        }
         
         
         return proceso
@@ -133,6 +111,7 @@ export default function TBC() {
                 }
                 if(recursos[recurso].ocupadoPor !== proceso.id){
                     proceso.estado = 'bloqueo'
+
                 }
             })
         }
@@ -154,6 +133,7 @@ export default function TBC() {
     function verificarFinal(proceso) {
         if (proceso.tiempo === 0) {
             proceso.estado = 'finalizado'
+            TBC.recursos += parseInt(proceso.recursos)
             if (proceso.recursosNecesarios) {
                 proceso = eliminarRecursos(proceso)
             }
@@ -180,4 +160,9 @@ export default function TBC() {
         return proceso
     }
     
+    function agregarRecurso (recurso){
+        let copy = recursos
+        copy.push(recurso)
+        setRecursos(copy) 
+    }
 }
