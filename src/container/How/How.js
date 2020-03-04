@@ -3,7 +3,6 @@ import './How.css'
 export default function How() {
     return (
         <section id="how">
-            <img src={require('./mujer.svg')} alt="" />
             <div className="content">
                 <h1>Que es un Programa</h1>
                 <p>
@@ -54,6 +53,7 @@ export default function How() {
                     Este es solo un sistema basico que aplica los fundamentos
                 </p>
             </div>
+            <img src={require('./mujer.svg')} alt="" />
         </section>
     )
 }
