@@ -1,4 +1,5 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
+import useForceUpdate from 'use-force-update'
 
 export default function Creador({TBC, recursos}) {
     const template = {
@@ -13,40 +14,48 @@ export default function Creador({TBC, recursos}) {
     const refRecursos = React.createRef()
     const refTiempo = React.createRef()
     const [proceso, setProceso] = useState(template)
-
-    
-    
+    const [render, setrender] = useState(0)
+    const [rendercheck, setrendercheck] = useState(true)
+    useEffect(() => {
+        setrendercheck(false)
+    }, [render])
     const handleChange = (e) =>{
         let copy = proceso
         copy[e.target.name] = e.target.value
         setProceso(copy)
     }
-    const crearProceso = (e) => {
+
+    function crearProceso (e) {
         if(proceso.tiempo === 0){
+            alert("El proceso necesita un tiempo de procesador")
             return
         }
         if(proceso.nombre === ""){
+            alert("El proceso debe tener un nombre")
             return 
         }
-
+        if((TBC.recursos-proceso.recursos) <= 0){
+            alert("Estas intentando usar mas recursos de los disponibles")
+            return 
+        }
         if(proceso.recursos === 0){
-            if((TBC.recursos-proceso.recursos) <= 0){
-                console.log("Estas intentando usar mas recursos de los disponibles")
-                
-                return 0 
-            }
-            return 0
+            alert("Todo proceso utiliza memoria del procesador")
+            return 
         }
         refNombre.current.value=''
         refTiempo.current.value= ''
         refRecursos.current.value=''
         TBC.recursos -= proceso.recursos
-        console.log(proceso)
         proceso.id = TBC.nextId
         TBC.nextId += 1
         TBC.procesos.push(proceso)
         setProceso(template)
+        let x = render +1
+        setrender(x)
+        
+        setrendercheck(true)
     }
+    
     const cambiarEstadoDelCheckBox = (e) => {
         let id
             recursos.forEach((element,index) =>{
@@ -68,6 +77,7 @@ export default function Creador({TBC, recursos}) {
     }
     return (
         <div className="creador">
+                
             <span className="title">Crea un proceso</span>
             <div className="form">
                 <input placeholder="Nombre" type="text" ref={refNombre} name="nombre" onChange={handleChange} />
@@ -75,7 +85,7 @@ export default function Creador({TBC, recursos}) {
                 <input placeholder="Cantidad de memoria" type="number" ref={refRecursos} name="recursos"  onChange={handleChange}/>
                 <div className="check-container">
                     {
-                        recursos.map(recurso =>{
+                        (rendercheck)? <h1>Render</h1>: recursos.map(recurso =>{
                             return (
                                 <div key={recurso.nombre} className="checkbox">
                                     <input onChange={cambiarEstadoDelCheckBox} id={recurso.nombre} name={recurso.nombre} type="checkbox" />
