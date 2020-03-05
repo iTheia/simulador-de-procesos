@@ -53,7 +53,6 @@ export default function How() {
                     Este es solo un sistema basico que aplica los fundamentos
                 </p>
             </div>
-            <img src={require('./mujer.svg')} alt="" />
         </section>
     )
 }
