@@ -6,7 +6,7 @@ export default function Home() {
         <section id="home">
             <div className="container">
                 <h1> <span>Simulador de procesos</span> de un sistema operativo</h1>
-                <img className="logo" src={require('./src/process.svg')} alt="imagen" />
+                <img className="logo" src={require('./src/Proceso.svg')} alt="imagen" />
             </div>
         </section>
         </>
