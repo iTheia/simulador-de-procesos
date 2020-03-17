@@ -15,6 +15,17 @@
       grid-template-rows: 250px 200px 100px 200px 70vh;
 }
 
+#simulator .content .algoritmo {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 1;
+  grid-row: 3/4;
+  font-size: 1.2rem;
+  height: 40px;
+}
+
 #simulator .content .container-imagen {
   -ms-grid-row: 4;
   -ms-grid-row-span: 2;

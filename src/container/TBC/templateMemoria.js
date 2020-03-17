@@ -4,6 +4,7 @@ export default function name() {
 
     for (let index = 0; index < 2000; index++) {
         particiones.push({
+            id:index,
             ocupadoPor: null,
             color: "",
         })

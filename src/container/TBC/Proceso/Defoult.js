@@ -8,7 +8,7 @@ export default function Defoult({TBC}) {
     const powerPoint = {
         id:null,
         nombre:"Power Point",
-        tiempo:30,
+        tiempo:20,
         estado:"listo",
         recursosNecesarios:[],
         recursos:300,
@@ -17,7 +17,7 @@ export default function Defoult({TBC}) {
     const word = {
         id:null,
         nombre:"Word",
-        tiempo:20,
+        tiempo:15,
         estado:"listo",
         recursosNecesarios:[],
         recursos:200,
@@ -42,11 +42,53 @@ export default function Defoult({TBC}) {
 
         proceso.id = TBC.nextId
         let contador = proceso.recursos
-        for (let index = 0; index < TBC.particiones.length; index++) {
-            if (TBC.particiones[index].ocupadoPor === null && contador !== 0) {
-                TBC.particiones[index].ocupadoPor = proceso.id
-                TBC.particiones[index].color = proceso.color
-                contador--
+        let contiguos = true
+        if(TBC.algoritmo === 1){
+            for (let index = 0; index < TBC.particiones.length; index++) {
+                if (contador === 0) {
+                    break
+                }else if (TBC.particiones[index].ocupadoPor === null && contador !== 0) {
+                    TBC.particiones[index].ocupadoPor = proceso.id
+                    TBC.particiones[index].color = proceso.color
+                    contador--
+                }
+
+            }
+        }else if(TBC.algoritmo === 2){
+            let indices = []
+            for (let index = 0; index < TBC.particiones.length; index++) {
+                if (contador !== 0) {
+                    if (TBC.particiones[index].ocupadoPor !== null) {
+                        contiguos = false
+                        indices = []
+                        contador = proceso.recursos 
+                    }else if (TBC.particiones[index].ocupadoPor === null) {
+                        indices.push(TBC.particiones[index].id)
+                        contador--
+                        contiguos = true
+                    }
+                }
+            }
+            if (contiguos) {
+                indices.forEach((indice) =>{
+                    TBC.particiones.forEach(particion =>{
+                        if (particion.id === indice) {
+                            particion.ocupadoPor = proceso.id
+                            particion.color = proceso.color
+                        }
+                    })
+                })
+            }
+            
+        }else if(TBC.algoritmo === 3){
+            for (let index = 0; index < TBC.particiones.length; index++) {
+                if (contador === 0) {
+                    break
+                }else if (TBC.particiones[index].ocupadoPor === null && contador !== 0) {
+                    TBC.particiones[index].ocupadoPor = proceso.id
+                    TBC.particiones[index].color = proceso.color
+                    contador--
+                }
             }
         }
         TBC.recursos -= proceso.recursos
@@ -59,15 +101,15 @@ export default function Defoult({TBC}) {
     }
     return (
         <div className="defoult">
-                <button onClick={(e) => crearProceso(e, powerPoint)}>
-                    <img src={pptIcon} alt="" style={style} />
-                </button>
-                <button onClick={(e) => crearProceso(e, word)}>
-                    <img src={wordIcon} alt="" style={style} />
-                </button>
-                <button  onClick={(e) => crearProceso(e, excel)}>
-                    <img src={excelIcon} alt="" style={style} />
-                </button>
+            <button onClick={(e) => crearProceso(e, powerPoint)}>
+                <img src={pptIcon} alt="" style={style} />
+            </button>
+            <button onClick={(e) => crearProceso(e, word)}>
+                <img src={wordIcon} alt="" style={style} />
+            </button>
+            <button  onClick={(e) => crearProceso(e, excel)}>
+                <img src={excelIcon} alt="" style={style} />
+            </button>
         </div>
     )
 }

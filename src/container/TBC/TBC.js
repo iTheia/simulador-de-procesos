@@ -16,10 +16,11 @@ export default function TBC() {
     const [TBC, setTBC] = useState({
         actual: 1,
         nextId:1,
+        algoritmo: 1,
         recursos:2000,
         procesos: [],
         particiones: templateMemoria()
-    })  
+    })
 
     useEffect(() => {
         const interval = setInterval(() => setTime(Date.now()), 1000)
@@ -32,6 +33,22 @@ export default function TBC() {
         
             if (procesoActual.estado === 'listo' ) {
                 procesoActual.tiempo -=1
+                if (TBC.algoritmo === 3){
+                    for (let j = 0; j < TBC.particiones.length; j++) {
+                        for (let index = 0; index < TBC.particiones.length; index++) {
+                            let current =  TBC.particiones[index]
+                            if (current.ocupadoPor === null && index !== TBC.particiones.length -1) {
+                                let next = TBC.particiones[(index+1)]
+                                if (next.ocupadoPor !==null) {
+                                    TBC.particiones[index] = next
+                                    TBC.particiones[(index+1)] = current
+                                }
+                            }
+                            
+                        }
+                    }
+                    
+                }
             }
             procesoActual = verificarFinal(procesoActual)
             if (procesoActual) {
@@ -57,6 +74,10 @@ export default function TBC() {
         }
     }, [time])
 
+    const cambioAlgoritmo = e =>{
+        TBC[e.target.name] = parseInt(e.target.value)
+    }
+
     return (
         <section id="simulator">
             <div className="content">
@@ -66,6 +87,11 @@ export default function TBC() {
                 <CreadorRecurso agregarRecurso={agregarRecurso}></CreadorRecurso>
                 <Memoria TBC={TBC}></Memoria>
                 <Defoult TBC={TBC}></Defoult>
+                <select onChange={cambioAlgoritmo} className="algoritmo" name="algoritmo" id="">
+                    <option value={1}>Usar todas las particiones</option>
+                    <option value={2}>Por huecos</option>
+                    <option value={3}>Corrimiento</option>
+                </select>
                 <RecursosDelProcesador RecursosDelProcesador={TBC.recursos}></RecursosDelProcesador>
             </div>
         </section>

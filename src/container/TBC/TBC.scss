@@ -8,6 +8,13 @@
         display: grid;
         grid-template-columns: 2fr 2fr 2fr 3fr;
         grid-template-rows:  250px 200px 100px 200px 70vh;
+
+        .algoritmo{
+            grid-column: 2/3;
+            grid-row: 3/4;
+            font-size: 1.2rem;
+            height: 40px;
+        }
         .container-imagen{
             grid-row: 4/6;
             grid-column: 1/2;
