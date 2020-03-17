@@ -3,11 +3,11 @@
     .content{
         background: inherit;
         margin-top: 12em;
-        height: 100vh;
+        height: 150vh;
         width: 100%;
         display: grid;
-        grid-template-columns: 2fr 1fr 4fr 1fr;
-        grid-template-rows:  1fr 1fr .5fr 1fr 1fr;
+        grid-template-columns: 2fr 2fr 2fr 3fr;
+        grid-template-rows:  250px 200px 100px 200px 70vh;
         .container-imagen{
             grid-row: 4/6;
             grid-column: 1/2;
@@ -15,7 +15,15 @@
                 width: 100%;
             }
         }
-        
+        .defoult{
+            grid-row: 2/3;
+            grid-column: 2/3;
+            button{
+                background:none;
+                border: none;
+                outline: none;
+            }
+        }
         .creador{
             grid-row: 1 / 4;
             padding: 20px;
@@ -100,9 +108,10 @@
         .tabla{
             border-radius: 15px;
             padding: 10px 20px;
-            margin: 10px 20px;
-            grid-row: 2 / 6;
-            grid-column: 2 / 5;
+            height: 70vh;
+            margin: 10px 0;
+            grid-row: 5 / 6;
+            grid-column: 1 / 5;
             display: flex;
             flex-direction: column;
             color: #ffffff;
@@ -141,7 +150,7 @@
         }
         .box{
             grid-row: 1/2;
-            grid-column: 4/5;
+            grid-column: 2/3;
         }
         .creador-recurso{
             grid-row: 4/5;

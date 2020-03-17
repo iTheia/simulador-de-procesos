@@ -1,4 +1,4 @@
-export default function name(params) {
+export default function name() {
     return [
         {
             ocupadoPor:null,

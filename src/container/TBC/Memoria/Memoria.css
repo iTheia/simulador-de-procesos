@@ -1,0 +1,11 @@
+.Memoria {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 4;
+  grid-row: 1/5;
+}
+
+.Memoria .particion {
+  margin: 0;
+  padding: 0;
+}
+/*# sourceMappingURL=Memoria.css.map */

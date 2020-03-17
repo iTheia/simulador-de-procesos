@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,QAAQ,CAAA;EACJ,QAAQ,EAAE,GAAG;CAKhB;;AAND,AAEI,QAFI,CAEJ,UAAU,CAAA;EACN,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;CACb",
+    "sources": [
+        "Memoria.scss"
+    ],
+    "names": [],
+    "file": "Memoria.css"
+}

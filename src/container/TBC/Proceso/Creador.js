@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react'
-import useForceUpdate from 'use-force-update'
+import { SketchPicker } from 'react-color'
 
 export default function Creador({TBC, recursos}) {
     const template = {
@@ -8,7 +8,8 @@ export default function Creador({TBC, recursos}) {
         tiempo:0,
         estado:"listo",
         recursosNecesarios:[],
-        recursos:0
+        recursos:0,
+        color: "#111"
     }
     const refNombre = React.createRef()
     const refRecursos = React.createRef()
@@ -45,14 +46,24 @@ export default function Creador({TBC, recursos}) {
         refNombre.current.value=''
         refTiempo.current.value= ''
         refRecursos.current.value=''
-        TBC.recursos -= proceso.recursos
+
         proceso.id = TBC.nextId
+        let contador = proceso.recursos
+        
+        for (let index = 0; index < TBC.particiones.length; index++) {
+            if (TBC.particiones[index].ocupadoPor === null && contador !== 0) {
+                TBC.particiones[index].ocupadoPor = proceso.id
+                console.log(proceso)
+                TBC.particiones[index].color = proceso.color
+                contador--
+            }
+        }
+        TBC.recursos -= proceso.recursos
         TBC.nextId += 1
         TBC.procesos.push(proceso)
         setProceso(template)
         let x = render +1
         setrender(x)
-        
         setrendercheck(true)
     }
     
@@ -83,6 +94,7 @@ export default function Creador({TBC, recursos}) {
                 <input placeholder="Nombre" type="text" ref={refNombre} name="nombre" onChange={handleChange} />
                 <input placeholder="Tiempo en procesador" type="number" ref={refTiempo} name="tiempo" onChange={handleChange}/>
                 <input placeholder="Cantidad de memoria" type="number" ref={refRecursos} name="recursos"  onChange={handleChange}/>
+                <input type="color" name="color" onChange={handleChange}/>
                 <div className="check-container">
                     {
                         (rendercheck)? <h1>Render</h1>: recursos.map(recurso =>{

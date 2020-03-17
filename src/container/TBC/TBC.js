@@ -6,6 +6,10 @@ import ContainerRecursos from './Proceso/ContainerRecursos'
 import './TBC.css'
 import RecursosDelProcesador from './Proceso/RecursosDelProcesador'
 import templateRecursos from './template.js'
+import templateMemoria from './templateMemoria.js'
+import Memoria from './Memoria/Memoria'
+import Defoult from './Proceso/Defoult'
+
 export default function TBC() {
     const [time, setTime] = useState(Date.now())
     const [recursos, setRecursos] = useState(templateRecursos())
@@ -13,8 +17,9 @@ export default function TBC() {
         actual: 1,
         nextId:1,
         recursos:2000,
-        procesos: []
-    }) 
+        procesos: [],
+        particiones: templateMemoria()
+    })  
 
     useEffect(() => {
         const interval = setInterval(() => setTime(Date.now()), 1000)
@@ -59,6 +64,8 @@ export default function TBC() {
                 <Creador TBC={TBC} recursos={recursos}></Creador>
                 <Tabla procesos={TBC.procesos} recursos={recursos}></Tabla>
                 <CreadorRecurso agregarRecurso={agregarRecurso}></CreadorRecurso>
+                <Memoria TBC={TBC}></Memoria>
+                <Defoult TBC={TBC}></Defoult>
                 <RecursosDelProcesador RecursosDelProcesador={TBC.recursos}></RecursosDelProcesador>
             </div>
         </section>
@@ -134,6 +141,12 @@ export default function TBC() {
         if (proceso.tiempo === 0) {
             proceso.estado = 'finalizado'
             TBC.recursos += parseInt(proceso.recursos)
+            TBC.particiones.forEach(particion =>{
+                if(particion.ocupadoPor === proceso.id){
+                    particion.ocupadoPor = null
+                    particion.color = "#f2f2f2"
+                }
+            })
             if (proceso.recursosNecesarios) {
                 proceso = eliminarRecursos(proceso)
             }
