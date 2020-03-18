@@ -88,9 +88,9 @@ export default function TBC() {
                 <Memoria TBC={TBC}></Memoria>
                 <Defoult TBC={TBC}></Defoult>
                 <select onChange={cambioAlgoritmo} className="algoritmo" name="algoritmo" id="">
-                    <option value={1}>Usar todas las particiones</option>
-                    <option value={2}>Por huecos</option>
-                    <option value={3}>Corrimiento</option>
+                    <option value={1}>Partición variable</option>
+                    <option value={2}>Primer ajuste</option>
+                    <option value={3}>Partición variable con Compactación</option>
                 </select>
                 <RecursosDelProcesador RecursosDelProcesador={TBC.recursos}></RecursosDelProcesador>
             </div>
